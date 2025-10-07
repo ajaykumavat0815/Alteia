@@ -1,0 +1,66 @@
+import React from "react";
+import { Table } from "antd";
+import SearchInput from "./SearchInput";
+import SortSelect from "./SortSelect";
+
+const DataTable = ({
+  columns = [],
+  data = [],
+  title,
+  description,
+  bordered = false,
+  pagination = false,
+  rowKey = "key",
+  showHeader = true,
+  searchValue,
+  onSearchChange,
+  onSearchSubmit,
+  sortOptions = [],
+  selectedSort,
+  onSortChange,
+}) => {
+  return (
+    <div className="w-full">
+      <div className="bg-white rounded-lg shadow-sm border border-gray-200">
+        <div className={`${showHeader ? "p-6" : "p-0"}`}>
+          {showHeader && (
+            <div className="flex flex-wrap justify-between items-center mb-4 gap-2">
+              <h4 className="font-sans font-bold text-[18px] leading-[32px] text-[#2B3674] align-middle tracking-tight">
+                {title || "Table Data"}
+              </h4>
+
+              {/* Right side controls */}
+              <div className="flex items-center gap-2">
+                <SearchInput
+                  value={searchValue}
+                  onChange={onSearchChange}
+                  onSearch={onSearchSubmit}
+                  placeholder="Search trades, sectors, or themes"
+                />
+                <SortSelect
+                  value={selectedSort}
+                  onChange={onSortChange}
+                  options={sortOptions}
+                />
+              </div>
+            </div>
+          )}
+
+          <div className="custom-table-border">
+            <Table
+              columns={columns}
+              dataSource={data}
+              pagination={pagination}
+              bordered={false}
+              rowKey={rowKey}
+              showHeader={showHeader}
+              className="custom-table"
+            />
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+};
+
+export default DataTable;
