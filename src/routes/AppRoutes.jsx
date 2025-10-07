@@ -4,7 +4,7 @@ import { Routes, Route } from "react-router-dom";
 import Dashboard from "../pages/Dashboard";
 import Investors from "../pages/Investors";
 import Funds from "../pages/Funds";
-import MainLayout from "../components/Layout/mainLayout";
+import MainLayout from "../components/Layout/MainLayout";
 
 const AppRoutes = () => {
   return (
