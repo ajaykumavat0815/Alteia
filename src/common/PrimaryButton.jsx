@@ -85,6 +85,7 @@ export default function PrimaryButton({
         hover:text-white ${className}`}
       style={{
         borderColor: primaryColor,
+        color: isHovered ? primaryColor : "black", // <-- change text color on hover
       }}
       {...rest}
     >
