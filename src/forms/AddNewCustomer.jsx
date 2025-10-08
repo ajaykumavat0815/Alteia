@@ -38,12 +38,14 @@ const AddNewCustomer = () => {
 
   return (
     <Layout id="dashboardLayout" className="!bg-white">
-      <DashboardHeader
-        title="Add New Customer"
-        subtitle="Fill in the details below to register a new customer and initiate KYC verification."
-        reverseOrder={true}
-      />
-      <div className="  rounded-lg p-8 font-sans">
+      <div className="pl-5 ml-5 pt-2 mt-0">
+        <DashboardHeader
+          title="Add New Customer"
+          subtitle="Fill in the details below to register a new customer and initiate KYC verification."
+          reverseOrder={true}
+        />
+      </div>
+      <div className="  rounded-lg p-8 font-sans p-5 m-5">
         <form onSubmit={handleSubmit} className="space-y-6">
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
             <FormInput

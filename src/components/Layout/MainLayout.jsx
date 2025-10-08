@@ -72,8 +72,8 @@ const MainLayout = ({ children }) => {
       >
         <Content
           style={{
-            margin: isMobile ? "8px" : "16px",
-            padding: isMobile ? "10px" : "16px",
+            margin: isMobile ? "8px" : "0px",
+            padding: isMobile ? "10px" : "0px",
             background: "transparent",
             borderRadius: "8px",
             minHeight: "calc(100vh - 32px)",

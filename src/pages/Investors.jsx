@@ -195,7 +195,7 @@ const Investors = () => {
         subtitle="Customers management"
       />
       <div className="mt-2">
-        <div className="bg-white rounded-lg shadow-sm border border-gray-200">
+        <div className="bg-white rounded-lg shadow-sm border border-gray-200 p-5 m-5">
           <DataTable
             title="Customer Investing"
             columns={columns}
