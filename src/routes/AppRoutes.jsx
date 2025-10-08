@@ -6,6 +6,7 @@ import Investors from "../pages/Investors";
 import Funds from "../pages/Funds";
 import MainLayout from "../components/Layout/MainLayout";
 import AddNewCustomer from "../forms/AddNewCustomer";
+import AddNewTrade from "../forms/AddNewTrade";
 
 const AppRoutes = () => {
   return (
@@ -48,6 +49,14 @@ const AppRoutes = () => {
         element={
           <MainLayout>
             <AddNewCustomer />
+          </MainLayout>
+        }
+      />
+      <Route
+        path="/addNewTrade"
+        element={
+          <MainLayout>
+            <AddNewTrade />
           </MainLayout>
         }
       />

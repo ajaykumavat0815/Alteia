@@ -20,6 +20,7 @@ const FormInput = ({
   labelFontSize = "14px", // default in px
   labelColor = "#044f55", // default color
   backgroundColor = "#f4f4f4", // input background color
+  uploadDescription = "Upload a file",
 }) => {
   const uploadButton = (
     <div className="flex flex-col items-center justify-center text-gray-600">
@@ -72,50 +73,6 @@ const FormInput = ({
   }
 
   // FILE UPLOAD FIELD
-  // if (type === "upload") {
-  //   return (
-  //     <div>
-  //       <label style={labelStyle}>
-  //         {label} {required && <span style={{ color: "red" }}>*</span>}
-  //       </label>
-  //       <div
-  //         style={{
-  //           border: "1px solid #ccc",
-  //           borderRadius: "0.5rem",
-  //           padding: "1rem",
-  //           background: backgroundColor,
-  //         }}
-  //       >
-  //         <AntUpload
-  //           listType="picture-card"
-  //           showUploadList={false}
-  //           beforeUpload={(file) => onFileUpload(file, name)}
-  //           accept=".jpg,.jpeg,.png,.pdf"
-  //         >
-  //           {value ? (
-  //             <div className="text-center">
-  //               <div className="text-green-600 font-medium">✓ Uploaded</div>
-  //               <div className="text-xs text-gray-500 mt-1">{value.name}</div>
-  //             </div>
-  //           ) : (
-  //             uploadButton
-  //           )}
-  //         </AntUpload>
-  //         <p
-  //           style={{
-  //             fontSize: "12px",
-  //             color: "#6B7280",
-  //             marginTop: "0.5rem",
-  //             textAlign: "center",
-  //           }}
-  //         >
-  //           Upload {label.toLowerCase()} (e.g., valid passport, ID card, utility
-  //           bill)
-  //         </p>
-  //       </div>
-  //     </div>
-  //   );
-  // }
 
   // if (type === "upload") {
   //   return (
@@ -128,44 +85,83 @@ const FormInput = ({
   //           border: "1px solid #ccc",
   //           borderRadius: "0.5rem",
   //           padding: "1rem",
-  //           backgroundImage: `url("src/assets/images/Upload.png")`,
+  //           backgroundImage: `url(${uploadBg})`,
   //           backgroundSize: "cover",
   //           backgroundPosition: "center",
   //           backgroundRepeat: "no-repeat",
   //           minHeight: "200px",
+  //           display: "flex",
+  //           flexDirection: "column",
+  //           alignItems: "center",
+  //           justifyContent: "center",
+  //           position: "relative",
   //         }}
   //       >
-  //         <AntUpload
-  //           listType="picture-card"
-  //           showUploadList={false}
-  //           beforeUpload={(file) => onFileUpload(file, name)}
-  //           accept=".jpg,.jpeg,.png,.pdf"
-  //         >
-  //           {value ? (
-  //             <div className="text-center">
-  //               <div className="text-green-600 font-medium">✓ Uploaded</div>
-  //               <div className="text-xs text-gray-500 mt-1">{value.name}</div>
-  //             </div>
-  //           ) : (
-  //             uploadButton
-  //           )}
-  //         </AntUpload>
-  //         <p
+  //         {/* Semi-transparent overlay */}
+  //         <div
   //           style={{
-  //             fontSize: "12px",
-  //             color: "#6B7280",
-  //             marginTop: "0.5rem",
-  //             textAlign: "center",
+  //             position: "absolute",
+  //             top: 0,
+  //             left: 0,
+  //             right: 0,
+  //             bottom: 0,
+  //             backgroundColor: "rgba(255, 255, 255, 0.7)",
+  //             borderRadius: "0.5rem",
+  //             zIndex: 1,
   //           }}
-  //         >
-  //           Upload {label.toLowerCase()} (e.g., valid passport, ID card, utility
-  //           bill)
-  //         </p>
+  //         ></div>
+
+  //         <div style={{ position: "relative", zIndex: 2, textAlign: "center" }}>
+  //           <AntUpload
+  //             listType="picture-card"
+  //             showUploadList={false}
+  //             beforeUpload={(file) => onFileUpload(file, name)}
+  //             accept=".jpg,.jpeg,.png,.pdf"
+  //           >
+  //             {value ? (
+  //               <div className="text-center">
+  //                 <div className="text-green-600 font-medium">✓ Uploaded</div>
+  //                 <div className="text-xs text-gray-500 mt-1">{value.name}</div>
+  //               </div>
+  //             ) : (
+  //               <div style={{ textAlign: "center", padding: "20px" }}>
+  //                 <img
+  //                   src={uploadIcon}
+  //                   alt="Upload"
+  //                   style={{
+  //                     width: "48px",
+  //                     height: "48px",
+  //                     marginBottom: "12px",
+  //                     display: "block",
+  //                     marginLeft: "auto",
+  //                     marginRight: "auto",
+  //                   }}
+  //                 />
+  //                 {/* <div style={{ fontWeight: "500", marginBottom: "4px" }}>
+  //                   Click to upload
+  //                 </div> */}
+  //                 {/* <div style={{ fontSize: "12px", color: "#6B7280" }}>
+  //                   or drag and drop
+  //                 </div> */}
+  //               </div>
+  //             )}
+  //           </AntUpload>
+  //           <p
+  //             style={{
+  //               fontSize: "12px",
+  //               color: "#6B7280",
+  //               marginTop: "0.5rem",
+  //               textAlign: "center",
+  //             }}
+  //           >
+  //             Upload {label.toLowerCase()} (e.g., valid passport, ID card,
+  //             utility bill)
+  //           </p>
+  //         </div>
   //       </div>
   //     </div>
   //   );
   // }
-
   if (type === "upload") {
     return (
       <div>
@@ -229,26 +225,21 @@ const FormInput = ({
                       marginRight: "auto",
                     }}
                   />
-                  {/* <div style={{ fontWeight: "500", marginBottom: "4px" }}>
-                    Click to upload
-                  </div> */}
-                  {/* <div style={{ fontSize: "12px", color: "#6B7280" }}>
-                    or drag and drop
-                  </div> */}
                 </div>
               )}
             </AntUpload>
-            <p
-              style={{
-                fontSize: "12px",
-                color: "#6B7280",
-                marginTop: "0.5rem",
-                textAlign: "center",
-              }}
-            >
-              Upload {label.toLowerCase()} (e.g., valid passport, ID card,
-              utility bill)
-            </p>
+            {uploadDescription && (
+              <p
+                style={{
+                  fontSize: "12px",
+                  color: "#6B7280",
+                  marginTop: "0.5rem",
+                  textAlign: "center",
+                }}
+              >
+                {uploadDescription}
+              </p>
+            )}
           </div>
         </div>
       </div>

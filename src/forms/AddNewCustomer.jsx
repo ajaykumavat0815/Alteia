@@ -121,6 +121,7 @@ const AddNewCustomer = () => {
               type="upload"
               value={formData.identityDocument}
               onFileUpload={handleFileUpload}
+              uploadDescription="Upload proof of address (e.g., utility bill)"
               required
             />
             <FormInput
@@ -129,6 +130,7 @@ const AddNewCustomer = () => {
               type="upload"
               value={formData.proofOfAddress}
               onFileUpload={handleFileUpload}
+              uploadDescription="Upload identity proof (e.g., Valid Passport, ID card, passport)"
               required
             />
           </div>

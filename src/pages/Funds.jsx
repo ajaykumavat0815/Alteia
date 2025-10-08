@@ -6,6 +6,7 @@ import { useNavigate } from "react-router-dom";
 import iblue1 from "../assets/icons/iblue1.svg";
 import eys1 from "../assets/icons/eys1.svg";
 import dollar1 from "../assets/icons/dollar1.svg";
+import PrimaryButton from "../common/PrimaryButton";
 
 const Funds = () => {
   const navigate = useNavigate();
@@ -259,6 +260,13 @@ const Funds = () => {
             pagination={true}
             bordered={true}
           />
+          <div className="mt-2 flex justify-end p-3">
+            <PrimaryButton
+              text="Add New Trade"
+              onClick={() => navigate("/addNewTrade")}
+              noIcon={true}
+            />
+          </div>
         </div>
       </div>
     </Layout>
