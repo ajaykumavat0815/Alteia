@@ -10,14 +10,13 @@ const RecentActivity = ({ activities, title = "Recent Activity" }) => {
       dataIndex: "name",
       key: "name",
       render: (name, record) => (
-        <div className="flex items-center space-x-3">
+        <div className="flex items-start space-x-3">
           <div>
-            {/* <div className="font-medium text-gray-900">{name}</div> */}
-            <h4 className="font-sans font-bold text-[14px] leading-[32px] text-[#2B3674] align-middle tracking-tight">
+            <h4 className="font-sans font-bold text-[14px] leading-[20px] text-[#2B3674] tracking-tight">
               {name}
             </h4>
             {record.description && (
-              <div className="text-xs font-normal leading-[100%] tracking-normal text-[#A3AED0] mt-1 font-sans">
+              <div className="text-xs font-normal text-[#A3AED0] mt-1 font-sans">
                 {record.description}
               </div>
             )}
@@ -40,7 +39,6 @@ const RecentActivity = ({ activities, title = "Recent Activity" }) => {
         };
 
         const className = colorMap[status] || "text-gray-600 bg-gray-50";
-
         const dotColorMap = {
           "text-green-600": "#16a34a",
           "text-blue-600": "#2563eb",
@@ -48,7 +46,6 @@ const RecentActivity = ({ activities, title = "Recent Activity" }) => {
           "text-red-600": "#dc2626",
           "text-gray-600": "#4b5563",
         };
-
         const textColorClass = className.split(" ")[0];
         const dotColor = dotColorMap[textColorClass] || "#4b5563";
 
@@ -67,41 +64,46 @@ const RecentActivity = ({ activities, title = "Recent Activity" }) => {
         );
       },
     },
-
     {
       title: "Time",
       dataIndex: "time",
       key: "time",
-      render: (time) => <span className="text-gray-500 text-sm">{time}</span>,
+      render: (time) => (
+        <span className="text-gray-500 text-sm whitespace-nowrap">{time}</span>
+      ),
     },
   ];
 
   const handleDateChange = (date, dateString) => {
     console.log("Selected Date:", dateString);
-    // Use the selected date in parent component
   };
+
   return (
-    <Card className="p-4">
-      {/* Header: Title on left, Calendar on right */}
-      <div className="flex justify-between items-center mb-4">
-        <h4 className="font-sans font-bold text-[18px] leading-[32px] text-[#2B3674] align-middle tracking-tight">
+    <Card className="p-4 sm:p-6 rounded-xl shadow-sm">
+      {/* Header */}
+      <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between mb-4 gap-3">
+        <h4 className="font-sans font-bold text-[18px] leading-[28px] text-[#2B3674] tracking-tight">
           {title}
         </h4>
-        <Calendar
-          onDateChange={handleDateChange}
-          displayMode="icon"
-          iconStyle={{ fontSize: "18px", color: "black" }}
-          className="hover:bg-blue-50"
-        />
+        <div className="flex justify-end">
+          <Calendar
+            onDateChange={handleDateChange}
+            displayMode="icon"
+            iconStyle={{ fontSize: "18px", color: "black" }}
+            className="hover:bg-blue-50"
+          />
+        </div>
       </div>
 
       {/* Table */}
-      <DataTable
-        columns={columns}
-        data={activities}
-        pagination={false}
-        showHeader={false}
-      />
+      <div className="overflow-x-auto">
+        <DataTable
+          columns={columns}
+          data={activities}
+          pagination={false}
+          showHeader={false}
+        />
+      </div>
     </Card>
   );
 };

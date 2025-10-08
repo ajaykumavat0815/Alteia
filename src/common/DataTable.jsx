@@ -30,31 +30,35 @@ const DataTable = ({
               </h4>
 
               {/* Right side controls */}
-              <div className="flex items-center gap-2">
-                <SearchInput
-                  value={searchValue}
-                  onChange={onSearchChange}
-                  onSearch={onSearchSubmit}
-                  placeholder="Search trades, sectors, or themes"
-                />
-                <SortSelect
-                  value={selectedSort}
-                  onChange={onSortChange}
-                  options={sortOptions}
-                />
+              <div className="flex flex-wrap items-center gap-2 w-full">
+                <div className="flex-1 min-w-[150px]">
+                  <SearchInput
+                    value={searchValue}
+                    onChange={onSearchChange}
+                    onSearch={onSearchSubmit}
+                    placeholder="Search trades, sectors, or themes"
+                  />
+                </div>
+                <div className="w-full sm:w-auto min-w-[120px]">
+                  <SortSelect
+                    value={selectedSort}
+                    onChange={onSortChange}
+                    options={sortOptions}
+                  />
+                </div>
               </div>
             </div>
           )}
-
-          <div className="custom-table-border">
+          <div className="overflow-x-auto scrollbar-thin scrollbar-thumb-gray-300 scrollbar-track-gray-100">
             <Table
               columns={columns}
               dataSource={data}
               pagination={pagination}
-              bordered={false}
+              bordered={bordered}
               rowKey={rowKey}
               showHeader={showHeader}
-              className="custom-table"
+              scroll={{ x: 500 }}
+              className="custom-table min-w-[500px]"
             />
           </div>
         </div>
