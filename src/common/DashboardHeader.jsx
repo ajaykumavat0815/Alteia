@@ -19,7 +19,7 @@ const DashboardHeader = ({
     >
       {/* Left side (title + subtitle) */}
 
-      <div className="flex flex-col min-w-0">
+      <div className="flex flex-col min-w-0 pl-5 sm:pl-0">
         {reverseOrder ? (
           <>
             <h2 className="text-lg sm:text-2xl font-semibold text-gray-900 truncate">
@@ -40,6 +40,7 @@ const DashboardHeader = ({
           </>
         )}
       </div>
+
       {/* Right side (notifications + user) */}
       <div className="flex items-center gap-3 sm:gap-4 flex-shrink-0">
         {showNotification && (
