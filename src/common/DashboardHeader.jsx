@@ -10,20 +10,36 @@ const DashboardHeader = ({
   showNotification = true,
   showUserAvatar = true,
   notificationCount = 0,
+  reverseOrder = false, // new prop to control order
 }) => {
   return (
     <Header
       id="dashboardHeader"
-      className="!px-4 sm:!px-6 !py-3 !bg-white flex items-center justify-between"
+      className="!px-4 sm:!px-6 !py-3 flex items-center justify-between"
     >
       {/* Left side (title + subtitle) */}
-      <div className="flex flex-col min-w-0">
-        <p className="text-xs sm:text-sm text-gray-500 truncate">{subtitle}</p>
-        <h2 className="text-lg sm:text-2xl font-semibold text-gray-900 truncate">
-          {title}
-        </h2>
-      </div>
 
+      <div className="flex flex-col min-w-0">
+        {reverseOrder ? (
+          <>
+            <h2 className="text-lg sm:text-2xl font-semibold text-gray-900 truncate">
+              {title}
+            </h2>
+            <p className="text-xs sm:text-sm text-gray-500 truncate">
+              {subtitle}
+            </p>
+          </>
+        ) : (
+          <>
+            <p className="text-xs sm:text-sm text-gray-500 truncate">
+              {subtitle}
+            </p>
+            <h2 className="text-lg sm:text-2xl font-semibold text-gray-900 truncate">
+              {title}
+            </h2>
+          </>
+        )}
+      </div>
       {/* Right side (notifications + user) */}
       <div className="flex items-center gap-3 sm:gap-4 flex-shrink-0">
         {showNotification && (

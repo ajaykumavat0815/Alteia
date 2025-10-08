@@ -195,25 +195,27 @@ const Investors = () => {
         subtitle="Customers management"
       />
       <div className="mt-2">
-        <DataTable
-          title="Customer Investing"
-          columns={columns}
-          data={data}
-          searchValue={search}
-          onSearchChange={handleSearchChange}
-          onSearchSubmit={handleSearchSubmit}
-          sortOptions={sortOptions}
-          selectedSort={sortBy}
-          onSortChange={handleSortChange}
-          pagination={true}
-          bordered={true}
-        />
-        <div className="mt-2 flex justify-end">
-          <PrimaryButton
-            text="Add New Customer"
-            onClick={() => navigate("/addNewCustomer")}
-            noIcon={true}
+        <div className="bg-white rounded-lg shadow-sm border border-gray-200">
+          <DataTable
+            title="Customer Investing"
+            columns={columns}
+            data={data}
+            searchValue={search}
+            onSearchChange={handleSearchChange}
+            onSearchSubmit={handleSearchSubmit}
+            sortOptions={sortOptions}
+            selectedSort={sortBy}
+            onSortChange={handleSortChange}
+            pagination={true}
+            bordered={true}
           />
+          <div className="mt-2 flex justify-end p-3">
+            <PrimaryButton
+              text="Add New Customer"
+              onClick={() => navigate("/addNewCustomer")}
+              noIcon={true}
+            />
+          </div>
         </div>
       </div>
     </Layout>

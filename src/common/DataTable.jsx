@@ -21,46 +21,47 @@ const DataTable = ({
 }) => {
   return (
     <div className="w-full">
-      <div className="bg-white rounded-lg shadow-sm border border-gray-200">
-        <div className={`${showHeader ? "p-6" : "p-0"}`}>
-          {showHeader && (
-            <div className="flex flex-wrap justify-between items-center mb-4 gap-2">
-              <h4 className="font-sans font-bold text-[18px] leading-[32px] text-[#2B3674] align-middle tracking-tight">
-                {title || "Table Data"}
-              </h4>
+      <div className={`${showHeader ? "p-6" : "p-0"}`}>
+        {showHeader && (
+          <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center mb-4 gap-4">
+            {/* Left side: Title */}
+            <h4 className="font-sans font-bold text-[18px] leading-[32px] text-[#2B3674] tracking-tight">
+              {title || "Table Data"}
+            </h4>
 
-              {/* Right side controls */}
-              <div className="flex flex-wrap items-center gap-2 w-full">
-                <div className="flex-1 min-w-[150px]">
-                  <SearchInput
-                    value={searchValue}
-                    onChange={onSearchChange}
-                    onSearch={onSearchSubmit}
-                    placeholder="Search trades, sectors, or themes"
-                  />
-                </div>
-                <div className="w-full sm:w-auto min-w-[120px]">
-                  <SortSelect
-                    value={selectedSort}
-                    onChange={onSortChange}
-                    options={sortOptions}
-                  />
-                </div>
+            {/* Right side: Search + Sort */}
+            <div className="flex flex-col sm:flex-row sm:items-center gap-2 w-full sm:w-auto">
+              <div className="flex-1 min-w-[150px]">
+                <SearchInput
+                  value={searchValue}
+                  onChange={onSearchChange}
+                  onSearch={onSearchSubmit}
+                  placeholder="Search trades, sectors, or themes"
+                />
+              </div>
+              <div className="w-full sm:w-auto min-w-[120px]">
+                <SortSelect
+                  value={selectedSort}
+                  onChange={onSortChange}
+                  options={sortOptions}
+                />
               </div>
             </div>
-          )}
-          <div className="overflow-x-auto scrollbar-thin scrollbar-thumb-gray-300 scrollbar-track-gray-100">
-            <Table
-              columns={columns}
-              dataSource={data}
-              pagination={pagination}
-              bordered={bordered}
-              rowKey={rowKey}
-              showHeader={showHeader}
-              scroll={{ x: 500 }}
-              className="custom-table min-w-[500px]"
-            />
           </div>
+        )}
+
+        {/* Table */}
+        <div className="overflow-x-auto scrollbar-thin scrollbar-thumb-gray-300 scrollbar-track-gray-100">
+          <Table
+            columns={columns}
+            dataSource={data}
+            pagination={pagination}
+            bordered={bordered}
+            rowKey={rowKey}
+            showHeader={showHeader}
+            scroll={{ x: 500 }}
+            className="custom-table min-w-[500px]"
+          />
         </div>
       </div>
     </div>
