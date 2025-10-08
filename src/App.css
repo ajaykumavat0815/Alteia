@@ -127,3 +127,13 @@
 }
 
 /* ==================================== */
+@media (max-width: 768px) {
+  .ant-layout {
+    flex-direction: column;
+  }
+
+  .ant-layout-content {
+    margin: 8px !important;
+    padding: 8px !important;
+  }
+}

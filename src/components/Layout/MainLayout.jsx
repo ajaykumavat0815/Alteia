@@ -1,7 +1,6 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Layout } from "antd";
 import Sidebar from "../../common/SideBar";
-
 import {
   UserOutlined,
   BarChartOutlined,
@@ -11,12 +10,19 @@ import {
   LineChartOutlined,
   UsergroupAddOutlined,
 } from "@ant-design/icons";
-const { Content } = Layout;
 import logo from "../../assets/images/Alteia Fund Logo.png";
 
-const MainLayout = ({ title, description, backButton, children }) => {
-  // Track collapsed state here and pass to Sidebar
+const { Content } = Layout;
+
+const MainLayout = ({ children }) => {
   const [isCollapsed, setIsCollapsed] = useState(false);
+  const [isMobile, setIsMobile] = useState(window.innerWidth < 768);
+
+  useEffect(() => {
+    const handleResize = () => setIsMobile(window.innerWidth < 768);
+    window.addEventListener("resize", handleResize);
+    return () => window.removeEventListener("resize", handleResize);
+  }, []);
 
   const menuItems = [
     { key: "/dashboard", icon: <AppstoreOutlined />, label: "Dashboard" },
@@ -35,18 +41,17 @@ const MainLayout = ({ title, description, backButton, children }) => {
       key: "settings",
       icon: <SettingOutlined />,
       label: "Settings",
-      onClick: () => navigate("/settings"),
     },
     {
       key: "logout",
       icon: <LogoutOutlined />,
       label: "Logout",
-      onClick: () => console.log("Logout clicked"),
     },
   ];
+
   return (
-    <Layout style={{ minHeight: "100vh", background: "#F5F5F5" }}>
-      {/* Sidebar (custom, not AntD Sider) */}
+    <Layout className="min-h-screen bg-[#F5F5F5] relative">
+      {/* Sidebar (collapsible or drawer) */}
       <Sidebar
         isCollapsed={isCollapsed}
         setIsCollapsed={setIsCollapsed}
@@ -56,17 +61,19 @@ const MainLayout = ({ title, description, backButton, children }) => {
         logo={logo}
       />
 
-      {/* Right-side layout */}
+      {/* Main Content Area */}
       <Layout
         style={{
-          marginLeft: isCollapsed ? "24px" : "250px",
+          // On desktop, reserve sidebar width; on mobile, use full width
+          marginLeft: isMobile ? "0px" : isCollapsed ? "80px" : "250px",
           transition: "margin-left 0.3s ease",
-          paddingLeft: isCollapsed ? "50px" : "0px",
+          minHeight: "100vh",
         }}
       >
         <Content
           style={{
-            margin: "16px",
+            margin: isMobile ? "8px" : "16px",
+            padding: isMobile ? "10px" : "16px",
             background: "transparent",
             borderRadius: "8px",
             minHeight: "calc(100vh - 32px)",
