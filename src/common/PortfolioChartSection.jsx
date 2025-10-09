@@ -1,5 +1,4 @@
 import React, { useState } from "react";
-import { Button } from "antd";
 import RoiChart from "./RoiChart";
 import TimePeriodSelector from "./TimePeriodSelector";
 import dayjs from "dayjs";
@@ -19,20 +18,22 @@ const PortfolioChartSection = ({
   });
 
   return (
-    <div>
+    <div className="w-full">
       {/* Top Filter Bar */}
-      <div className="flex justify-between items-center mb-4">
-        <h4 className="text-gray-800 text-base font-semibold">
+      <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center mb-4 gap-3">
+        <h4 className="text-gray-800 text-base sm:text-lg font-semibold">
           Yearly ROI Performance
         </h4>
-        <div className="flex gap-2">
+        <div className="flex flex-wrap gap-2 w-full sm:w-auto">
           <TimePeriodSelector
             defaultDate={selection.date}
             onSelectionChange={setSelection}
             showCalendar={true}
-          />{" "}
+          />
         </div>
       </div>
+
+      {/* Period Selector */}
       <div className="mb-4">
         <TimePeriodSelector
           defaultDate={selection.date}
@@ -40,10 +41,11 @@ const PortfolioChartSection = ({
           periods={periods}
           periodSelectorWidth="100%"
           activePeriodTextColor="#14db4cff"
-        />{" "}
+        />
       </div>
+
       {/* Range Filter */}
-      <div className="flex gap-4 mb-4 border-b border-gray-200 pb-2">
+      <div className="flex flex-wrap gap-4 mb-4 border-b border-gray-200 pb-2">
         {rangeFilters.map((label) => (
           <span
             key={label}
@@ -58,8 +60,9 @@ const PortfolioChartSection = ({
           </span>
         ))}
       </div>
+
       {/* Chart */}
-      <div className="h-80 bg-white p-4 rounded-md">
+      <div className="w-full h-72 sm:h-80 md:h-96 bg-white p-4 rounded-md shadow-sm overflow-x-auto">
         <RoiChart roiData={roiData} months={months} />
       </div>
     </div>

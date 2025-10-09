@@ -29,9 +29,14 @@ const RoiChart = ({ roiData = [], months = [] }) => {
         borderColor: "#22c55e",
         backgroundColor: (context) => {
           const ctx = context.chart.ctx;
-          const gradient = ctx.createLinearGradient(0, 0, 0, 350);
+          const gradient = ctx.createLinearGradient(
+            0,
+            0,
+            0,
+            context.chart.height
+          );
           gradient.addColorStop(0, "rgba(132, 204, 22, 0.5)");
-          gradient.addColorStop(1, "rgba(132, 204, 22, 0.1)");
+          gradient.addColorStop(1, "rgba(132, 204, 22, 0.05)");
           return gradient;
         },
         borderWidth: 2,
@@ -48,7 +53,7 @@ const RoiChart = ({ roiData = [], months = [] }) => {
 
   const options = {
     responsive: true,
-    maintainAspectRatio: false,
+    maintainAspectRatio: false, // allows height control via parent container
     plugins: {
       legend: { display: false },
       tooltip: {
@@ -76,7 +81,11 @@ const RoiChart = ({ roiData = [], months = [] }) => {
     },
   };
 
-  return <Line data={data} options={options} />;
+  return (
+    <div className="w-full h-72 sm:h-80 md:h-96">
+      <Line data={data} options={options} />
+    </div>
+  );
 };
 
 export default RoiChart;
