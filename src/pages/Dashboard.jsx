@@ -113,10 +113,12 @@ const Dashboard = () => {
 
   return (
     <Layout id="dashboardLayout">
-      <DashboardHeader
-        title="Welcome back, Sejal Kalyani!"
-        subtitle="Dashboard Overview"
-      />
+      <div className="mt-4">
+        <DashboardHeader
+          title="Welcome back, Sejal Kalyani!"
+          subtitle="Dashboard Overview"
+        />
+      </div>
       <Content id="dashboardContent">
         {/* Stats Cards */}
         <Row gutter={[16, 16]} className="mb-6">

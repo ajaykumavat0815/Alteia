@@ -241,10 +241,12 @@ const Funds = () => {
 
   return (
     <Layout>
-      <DashboardHeader
-        title="Browse and explore every available investment opportunity in one place."
-        subtitle="Trades management"
-      />
+      <div className="mt-4">
+        <DashboardHeader
+          title="Browse and explore every available investment opportunity in one place."
+          subtitle="Trades management"
+        />
+      </div>
       <div className="mt-2">
         <div className="bg-white rounded-lg shadow-sm border border-gray-200 p-5 m-5">
           <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center mb-4 gap-4">

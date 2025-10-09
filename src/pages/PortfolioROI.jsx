@@ -65,11 +65,13 @@ const PortfolioROI = ({ searchValue, onSearchChange, onSearchSubmit }) => {
   };
 
   return (
-    <div className="p-4 sm:p-6 lg:p-8 bg-gray-100 min-h-screen">
+    <div className="sm:p-6 lg:p-8 bg-gray-100 min-h-screen">
+      {/* <div className="mt-4"> */}
       <DashboardHeader
         title="Track your portfolio's performance and analyze monthly returns at a glance."
         subtitle="ROI Overview"
       />
+      {/* </div> */}
 
       <Card className="border-2 border-cyan-500 rounded-lg p-4 sm:p-6 bg-white mt-4">
         {/* Header: Portfolio title + actions */}

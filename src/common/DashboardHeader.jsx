@@ -19,13 +19,13 @@ const DashboardHeader = ({
     >
       {/* Left side (title + subtitle) */}
 
-      <div className="flex flex-col min-w-0 pl-5 sm:pl-0">
+      <div className="flex flex-col min-w-0 pl-5 sm:pl-0 ">
         {reverseOrder ? (
           <>
             <h2 className="text-lg sm:text-2xl font-semibold text-gray-900 truncate">
               {title}
             </h2>
-            <p className="text-xs sm:text-sm text-gray-500 truncate mb-0">
+            <p className="text-xs sm:text-sm text-gray-500 truncate mt-3 mb-0">
               {subtitle}
             </p>
           </>
