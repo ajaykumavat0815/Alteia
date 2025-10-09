@@ -29,7 +29,7 @@ const MainLayout = ({ children }) => {
     { key: "/investors", icon: <UserOutlined />, label: "Investors" },
     { key: "/funds", icon: <LineChartOutlined />, label: "Funds" },
     {
-      key: "/performance",
+      key: "/portfolioROI",
       icon: <BarChartOutlined />,
       label: "Fund Performance",
     },

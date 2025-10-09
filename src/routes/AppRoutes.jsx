@@ -7,6 +7,7 @@ import Funds from "../pages/Funds";
 import MainLayout from "../components/Layout/MainLayout";
 import AddNewCustomer from "../forms/AddNewCustomer";
 import AddNewTrade from "../forms/AddNewTrade";
+import PortfolioROI from "../pages/PortfolioROI";
 
 const AppRoutes = () => {
   return (
@@ -57,6 +58,15 @@ const AppRoutes = () => {
         element={
           <MainLayout>
             <AddNewTrade />
+          </MainLayout>
+        }
+      />
+
+      <Route
+        path="/portfolioROI"
+        element={
+          <MainLayout>
+            <PortfolioROI />
           </MainLayout>
         }
       />
