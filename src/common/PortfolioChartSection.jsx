@@ -33,39 +33,31 @@ const PortfolioChartSection = ({
         </div>
       </div>
 
-      {/* Period Selector */}
-      <div className="mb-4">
-        <TimePeriodSelector
-          defaultDate={selection.date}
-          onSelectionChange={setSelection}
-          periods={periods}
-          periodSelectorWidth="100%"
-          activePeriodTextColor="#14db4cff"
-        />
-      </div>
-
-      {/* Range Filter */}
-      <div className="flex flex-wrap gap-4 mb-4 border-b border-gray-200 pb-2">
-        {rangeFilters.map((label) => (
-          <span
-            key={label}
-            onClick={() => onRangeChange && onRangeChange(label)}
-            className={`text-sm cursor-pointer ${
-              label === activeRange
-                ? "text-green-600 font-semibold border-b-2 border-green-600"
-                : "text-gray-500"
-            }`}
-          >
-            {label}
-          </span>
-        ))}
-      </div>
-
-      {/* Chart */}
-      <div className="w-full h-72 sm:h-80 md:h-96 bg-white p-4 rounded-md shadow-sm overflow-x-auto">
-        <RoiChart roiData={roiData} months={months} />
-      </div>
+      <RoiChart
+        title="Yearly ROI Performance"
+        periods={["Today", "This Week", "This Month", "This Year"]}
+        data={[
+          { month: "Jan", roi: 7.5 },
+          { month: "Feb", roi: 8.2 },
+          { month: "Mar", roi: 9.5 },
+          { month: "Apr", roi: 8.8 },
+          { month: "May", roi: 10.2 },
+          { month: "Jun", roi: 9.8 },
+          { month: "Jul", roi: 11.0 },
+          { month: "Aug", roi: 10.5 },
+          { month: "Sep", roi: 12.3 },
+          { month: "Oct", roi: 11.7 },
+          { month: "Nov", roi: 13.0 },
+          { month: "Dec", roi: 12.5 },
+        ]}
+        xDataKey="month"
+        yDataKey="roi"
+        gradientColor="#8BC34A"
+        lineColor="#558B2F"
+        height={300}
+      />
     </div>
+    // </div>
   );
 };
 

@@ -1,89 +1,136 @@
-import React from "react";
-import { Line } from "react-chartjs-2";
+import React, { useState } from "react";
 import {
-  Chart as ChartJS,
-  CategoryScale,
-  LinearScale,
-  PointElement,
-  LineElement,
-  Title,
+  AreaChart,
+  Area,
+  XAxis,
+  YAxis,
   Tooltip,
-} from "chart.js";
+  ResponsiveContainer,
+} from "recharts";
+import TimePeriodSelector from "./TimePeriodSelector";
+import { Tabs } from "antd";
 
-ChartJS.register(
-  CategoryScale,
-  LinearScale,
-  PointElement,
-  LineElement,
-  Title,
-  Tooltip
-);
+const RoiChart = ({
+  title = "ROI Chart",
+  data = [],
+  xDataKey = "month",
+  yDataKey = "roi",
+  height = 350,
+  gradientColor = "#9CCC65",
+  lineColor = "#7CB342",
+  periods = ["Today", "This Week", "This Month", "This Year"],
+  defaultPeriod = "Today",
+    
+}) => {
+  const [selectedPeriod, setSelectedPeriod] = useState(defaultPeriod);
 
-const RoiChart = ({ roiData = [], months = [] }) => {
-  const data = {
-    labels: months,
-    datasets: [
-      {
-        label: "ROI %",
-        data: roiData,
-        borderColor: "#22c55e",
-        backgroundColor: (context) => {
-          const ctx = context.chart.ctx;
-          const gradient = ctx.createLinearGradient(
-            0,
-            0,
-            0,
-            context.chart.height
-          );
-          gradient.addColorStop(0, "rgba(132, 204, 22, 0.5)");
-          gradient.addColorStop(1, "rgba(132, 204, 22, 0.05)");
-          return gradient;
-        },
-        borderWidth: 2,
-        fill: true,
-        tension: 0.4,
-        pointRadius: 0,
-        pointHoverRadius: 6,
-        pointHoverBackgroundColor: "#22c55e",
-        pointHoverBorderColor: "#fff",
-        pointHoverBorderWidth: 2,
-      },
-    ],
+  const handleSelectionChange = ({ period }) => {
+    setSelectedPeriod(period);
+    // You can filter or fetch data based on the period here
   };
 
-  const options = {
-    responsive: true,
-    maintainAspectRatio: false, // allows height control via parent container
-    plugins: {
-      legend: { display: false },
-      tooltip: {
-        callbacks: {
-          title: (tooltipItems) => tooltipItems[0].label + " 2025",
-          label: (context) => context.parsed.y.toFixed(1) + "% ROI",
-        },
-      },
-    },
-    scales: {
-      x: {
-        grid: { display: false },
-        ticks: { color: "#6b7280", font: { size: 11 } },
-      },
-      y: {
-        beginAtZero: true,
-        max: 14,
-        grid: { color: "#e5e7eb", drawBorder: false },
-        ticks: {
-          color: "#6b7280",
-          font: { size: 11 },
-          callback: (v) => v + "%",
-        },
-      },
-    },
+  const CustomTooltip = ({ active, payload }) => {
+    if (active && payload && payload.length) {
+      const dataPoint = payload[0];
+      const currentIndex = data.findIndex(
+        (d) => d[xDataKey] === dataPoint.payload[xDataKey]
+      );
+      const previousValue =
+        currentIndex > 0 ? data[currentIndex - 1][yDataKey] : null;
+      const change = previousValue ? dataPoint.value - previousValue : null;
+
+      return (
+        <div className="bg-white px-3 py-2 rounded shadow-lg border border-gray-200">
+          <p className="text-sm font-medium text-gray-900">
+            {dataPoint.payload[xDataKey]} — {dataPoint.value.toFixed(1)}%
+            {change !== null && (
+              <span className="text-gray-600">
+                {" "}
+                ({change >= 0 ? "+" : ""}
+                {change.toFixed(1)}% from {data[currentIndex - 1][xDataKey]})
+              </span>
+            )}
+          </p>
+        </div>
+      );
+    }
+    return null;
   };
 
   return (
-    <div className="w-full h-72 sm:h-80 md:h-96">
-      <Line data={data} options={options} />
+    <div className="w-full max-w-6xl mx-auto">
+      <div className="bg-white rounded-lg  overflow-hidden">
+        <div className="p-4">
+          <TimePeriodSelector
+            periods={periods}
+            defaultPeriod={defaultPeriod}
+            onSelectionChange={handleSelectionChange}
+            periodBgColor="#E1E1E1"
+            activePeriodBgColor="#D9F0D9"
+            activePeriodTextColor="#1B386B"
+            periodTextColor="#555555"
+            borderColor="#FFFFFF"
+            periodSelectorWidth="100%"
+          />
+        </div>
+
+        {/* Chart */}
+        <div className="">
+          {/* <h4 className="text-gray-800 text-base font-semibold mb-4">
+            {title} — {selectedPeriod}
+          </h4> */}
+          <ResponsiveContainer width="100%" height={height}>
+            <AreaChart
+              data={data}
+              margin={{ top: 20, right: 30, left: 0, bottom: 0 }}
+            >
+              <defs>
+                <linearGradient id="colorRoi" x1="0" y1="0" x2="0" y2="1">
+                  <stop
+                    offset="5%"
+                    stopColor={gradientColor}
+                    stopOpacity={0.3}
+                  />
+                  <stop
+                    offset="95%"
+                    stopColor={gradientColor}
+                    stopOpacity={0.05}
+                  />
+                </linearGradient>
+              </defs>
+              <XAxis
+                dataKey={xDataKey}
+                axisLine={false}
+                tickLine={false}
+                tick={{ fill: "#9CA3AF", fontSize: 13 }}
+              />
+              <YAxis hide={true} />
+              <Tooltip
+                content={<CustomTooltip />}
+                cursor={{
+                  stroke: gradientColor,
+                  strokeWidth: 1,
+                  strokeDasharray: "3 3",
+                }}
+              />
+              <Area
+                type="monotone"
+                dataKey={yDataKey}
+                stroke={lineColor}
+                strokeWidth={2.5}
+                fill="url(#colorRoi)"
+                dot={false}
+                activeDot={{
+                  r: 5,
+                  fill: lineColor,
+                  strokeWidth: 2,
+                  stroke: "#fff",
+                }}
+              />
+            </AreaChart>
+          </ResponsiveContainer>
+        </div>
+      </div>
     </div>
   );
 };
