@@ -1,6 +1,6 @@
-import React, { useRef, useState } from "react";
+import React, { useRef, useState, useEffect } from "react";
 import { CalendarOutlined } from "@ant-design/icons";
-import { DatePicker } from "antd";
+import { DatePicker, Select } from "antd";
 import dayjs from "dayjs";
 import "antd/dist/reset.css";
 
@@ -20,7 +20,18 @@ const TimePeriodSelector = ({
 }) => {
   const [selectedPeriod, setSelectedPeriod] = useState(defaultPeriod);
   const [selectedDate, setSelectedDate] = useState(defaultDate);
+  const [isMobile, setIsMobile] = useState(false);
   const datePickerRef = useRef(null);
+
+  // ✅ Detect mobile screen
+  useEffect(() => {
+    const handleResize = () => {
+      setIsMobile(window.innerWidth < 640); // sm breakpoint
+    };
+    handleResize();
+    window.addEventListener("resize", handleResize);
+    return () => window.removeEventListener("resize", handleResize);
+  }, []);
 
   const handlePeriodChange = (period) => {
     setSelectedPeriod(period);
@@ -44,43 +55,59 @@ const TimePeriodSelector = ({
   return (
     <div className={`flex items-center gap-4 w-full ${customWrapperClass}`}>
       {/* ===== Period Selector ===== */}
-      <div
-        className={`flex border rounded-full overflow-hidden flex-1`}
-        style={{
-          backgroundColor: periodBgColor.startsWith("#")
-            ? periodBgColor
-            : undefined,
-          borderColor: borderColor.startsWith("#") ? borderColor : undefined,
-        }}
-      >
-        {periods.map((period) => {
-          const isActive = selectedPeriod === period;
-          return (
-            <button
-              key={period}
-              onClick={() => handlePeriodChange(period)}
-              className={`flex-1 text-sm font-medium transition-all border-r last:border-none`}
-              style={{
-                padding: "0.5rem 0", // vertical padding
-                backgroundColor: isActive
-                  ? activePeriodBgColor.startsWith("#")
-                    ? activePeriodBgColor
-                    : undefined
-                  : undefined,
-                color: isActive
-                  ? activePeriodTextColor.startsWith("#")
-                    ? activePeriodTextColor
-                    : undefined
-                  : periodTextColor.startsWith("#")
-                  ? periodTextColor
-                  : undefined,
-              }}
-            >
-              {period}
-            </button>
-          );
-        })}
-      </div>
+      {!isMobile ? (
+        // ✅ Desktop View — Keep your original button layout
+        <div
+          className={`flex border rounded-full overflow-hidden flex-1`}
+          style={{
+            backgroundColor: periodBgColor.startsWith("#")
+              ? periodBgColor
+              : undefined,
+            borderColor: borderColor.startsWith("#") ? borderColor : undefined,
+          }}
+        >
+          {periods.map((period) => {
+            const isActive = selectedPeriod === period;
+            return (
+              <button
+                key={period}
+                onClick={() => handlePeriodChange(period)}
+                className={`flex-1 text-sm font-medium transition-all border-r last:border-none`}
+                style={{
+                  padding: "0.5rem 0",
+                  backgroundColor: isActive
+                    ? activePeriodBgColor.startsWith("#")
+                      ? activePeriodBgColor
+                      : undefined
+                    : undefined,
+                  color: isActive
+                    ? activePeriodTextColor.startsWith("#")
+                      ? activePeriodTextColor
+                      : undefined
+                    : periodTextColor.startsWith("#")
+                    ? periodTextColor
+                    : undefined,
+                }}
+              >
+                {period}
+              </button>
+            );
+          })}
+        </div>
+      ) : (
+        // ✅ Mobile View — Show dropdown instead of buttons
+        <Select
+          value={selectedPeriod}
+          onChange={handlePeriodChange}
+          options={periods.map((p) => ({ label: p, value: p }))}
+          className="w-full text-sm"
+          style={{
+            borderRadius: "9999px",
+            backgroundColor: periodBgColor,
+            color: periodTextColor,
+          }}
+        />
+      )}
 
       {/* ===== Optional Calendar Picker ===== */}
       {showCalendar && (
@@ -93,7 +120,6 @@ const TimePeriodSelector = ({
             borderColor: borderColor.startsWith("#") ? borderColor : undefined,
           }}
         >
-          {/* Calendar Icon */}
           <div
             onClick={openCalendar}
             className="flex items-center justify-center w-10 h-10 cursor-pointer transition"
@@ -105,7 +131,6 @@ const TimePeriodSelector = ({
             <CalendarOutlined className="text-[#004b50] text-lg" />
           </div>
 
-          {/* Ant Design DatePicker */}
           <div ref={datePickerRef}>
             <DatePicker
               picker="month"
