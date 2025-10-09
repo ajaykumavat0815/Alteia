@@ -5,15 +5,11 @@ import dayjs from "dayjs";
 import "antd/dist/reset.css";
 
 const TimePeriodSelector = ({
-  // ===== Functional Props =====
   showCalendar = false,
   periods = ["3 Months", "6 Months", "12 Months"],
   defaultPeriod = "3 Months",
   defaultDate = dayjs("2025-08-01"),
   onSelectionChange,
-
-  // ===== Style Props =====
-  periodSelectorWidth = "auto",
   periodBgColor = "#E1E1E1",
   periodTextColor = "#555555",
   activePeriodBgColor = "#ECECEC",
@@ -46,46 +42,39 @@ const TimePeriodSelector = ({
   };
 
   return (
-    <div className={`flex flex-wrap items-center gap-4 ${customWrapperClass}`}>
+    <div className={`flex items-center gap-4 w-full ${customWrapperClass}`}>
       {/* ===== Period Selector ===== */}
       <div
-        className={`flex border rounded-full overflow-hidden`}
+        className={`flex border rounded-full overflow-hidden flex-1`}
         style={{
-          width: periodSelectorWidth,
           backgroundColor: periodBgColor.startsWith("#")
             ? periodBgColor
             : undefined,
           borderColor: borderColor.startsWith("#") ? borderColor : undefined,
         }}
       >
-        {periods.map((period, index) => {
+        {periods.map((period) => {
           const isActive = selectedPeriod === period;
-          const buttonStyle = isActive
-            ? {
-                backgroundColor: activePeriodBgColor.startsWith("#")
-                  ? activePeriodBgColor
-                  : undefined,
-                color: activePeriodTextColor.startsWith("#")
-                  ? activePeriodTextColor
-                  : undefined,
-              }
-            : {};
-
           return (
             <button
               key={period}
               onClick={() => handlePeriodChange(period)}
-              className={`flex-1 px-6 py-2 text-sm font-medium transition-all border-r last:border-none ${
-                isActive
-                  ? !activePeriodBgColor.startsWith("#") &&
-                    !activePeriodTextColor.startsWith("#")
-                    ? `${activePeriodBgColor} ${activePeriodTextColor} shadow-sm`
-                    : "shadow-sm"
-                  : !periodTextColor.startsWith("#")
-                  ? `${periodTextColor} hover:text-black`
-                  : ""
-              }`}
-              style={buttonStyle}
+              className={`flex-1 text-sm font-medium transition-all border-r last:border-none`}
+              style={{
+                padding: "0.5rem 0", // vertical padding
+                backgroundColor: isActive
+                  ? activePeriodBgColor.startsWith("#")
+                    ? activePeriodBgColor
+                    : undefined
+                  : undefined,
+                color: isActive
+                  ? activePeriodTextColor.startsWith("#")
+                    ? activePeriodTextColor
+                    : undefined
+                  : periodTextColor.startsWith("#")
+                  ? periodTextColor
+                  : undefined,
+              }}
             >
               {period}
             </button>

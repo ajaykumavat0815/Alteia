@@ -19,16 +19,16 @@ const PortfolioChartSection = ({
 
   return (
     <div className="w-full">
-      {/* Top Filter Bar */}
-      <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center mb-4 gap-3">
-        <h4 className="text-gray-800 text-base sm:text-lg font-semibold">
+      <div className="flex flex-col sm:flex-row justify-between items-center mb-4 gap-3">
+        <h4 className="text-gray-800 text-base sm:text-lg font-semibold flex-1 text-center sm:text-left">
           Yearly ROI Performance
         </h4>
-        <div className="flex flex-wrap gap-2 w-full sm:w-auto">
+        <div className="flex flex-wrap gap-2 flex-1 justify-center sm:justify-end">
           <TimePeriodSelector
             defaultDate={selection.date}
             onSelectionChange={setSelection}
             showCalendar={true}
+            fullWidth={true}
           />
         </div>
       </div>
