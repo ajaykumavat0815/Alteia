@@ -32,16 +32,17 @@ const DataTable = ({ columns = [], data = [], rowKey = "key" }) => {
   return (
     <div className="w-full bg-white rounded-lg shadow-sm">
       {/* Top Controls */}
-      <div className="flex justify-between items-center p-4 border-b">
-        <div className="flex items-center gap-2">
-          <div className="relative">
+      <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center p-4 border-b gap-3">
+        {/* Page Size Selector */}
+        <div className="flex items-center gap-2 w-full sm:w-auto">
+          <div className="relative w-full sm:w-auto">
             <select
               value={pageSize}
               onChange={(e) => {
                 setPageSize(Number(e.target.value));
                 setCurrentPage(1);
               }}
-              className="appearance-none border border-gray-300 rounded px-3 py-1.5 pr-8 text-sm focus:outline-none focus:border-gray-400"
+              className="appearance-none border border-gray-300 rounded px-3 py-1.5 pr-8 text-sm focus:outline-none focus:border-gray-400 w-full sm:w-auto"
             >
               <option value={5}>5</option>
               <option value={10}>10</option>
@@ -56,7 +57,7 @@ const DataTable = ({ columns = [], data = [], rowKey = "key" }) => {
         </div>
 
         {/* Search */}
-        <div className="relative">
+        <div className="relative w-full sm:w-64">
           <span className="absolute left-3 top-1/2 -translate-y-1/2 text-sm text-gray-500">
             Search:
           </span>
@@ -67,7 +68,8 @@ const DataTable = ({ columns = [], data = [], rowKey = "key" }) => {
               setSearchValue(e.target.value);
               setCurrentPage(1);
             }}
-            className="border border-gray-300 rounded pl-20 pr-3 py-1.5 text-sm focus:outline-none focus:border-gray-400 w-64"
+            className="border border-gray-300 rounded pl-16 pr-3 py-1.5 text-sm focus:outline-none focus:border-gray-400 w-full"
+            placeholder="Search..."
           />
         </div>
       </div>
@@ -80,19 +82,19 @@ const DataTable = ({ columns = [], data = [], rowKey = "key" }) => {
           rowKey={rowKey}
           bordered={false}
           pagination={false}
-          className="custom-table"
+          className="min-w-full"
         />
       </div>
 
       {/* Pagination Footer */}
-      <div className="flex justify-between items-center p-4 border-t">
+      <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center p-4 border-t gap-3">
         <div className="text-sm text-gray-600">
           Showing {startIndex + 1} to{" "}
           {Math.min(startIndex + pageSize, filteredData.length)} of{" "}
           {filteredData.length} entries
         </div>
 
-        <div className="flex items-center gap-1">
+        <div className="flex flex-wrap gap-1">
           <button
             onClick={() => setCurrentPage(1)}
             disabled={currentPage === 1}
@@ -138,8 +140,6 @@ const DataTable = ({ columns = [], data = [], rowKey = "key" }) => {
           </button>
         </div>
       </div>
-
-      {/* Style overrides: all rows bottom border */}
     </div>
   );
 };

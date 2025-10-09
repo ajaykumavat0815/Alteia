@@ -82,29 +82,6 @@ const PortfolioROI = ({ searchValue, onSearchChange, onSearchSubmit }) => {
               Portfolio Highlights
             </p>
           </div>
-
-          {/* <div className="flex flex-col sm:flex-row gap-2 sm:gap-3 w-full md:w-auto">
-            <SearchInput
-              value={searchValue}
-              onChange={onSearchChange}
-              onSearch={onSearchSubmit}
-              placeholder="Search trades, sectors, or themes"
-              className="flex-1"
-            />
-            <PrimaryButton
-              text="Sort by ▼"
-              onClick={() => navigate("/addNewCustomer")}
-              noIcon={true}
-              btnType="secondary"
-              textClassName="!text-sm"
-            />
-            <PrimaryButton
-              text="Add ROI"
-              onClick={() => navigate("/addNewCustomer")}
-              noIcon={true}
-              textClassName="!text-sm text-white"
-            />
-          </div> */}
         </div>
 
         {/* Metrics Section */}
