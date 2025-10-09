@@ -247,6 +247,20 @@ const Funds = () => {
       />
       <div className="mt-2">
         <div className="bg-white rounded-lg shadow-sm border border-gray-200 p-5 m-5">
+          <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center mb-4 gap-4">
+            {" "}
+            <h4 className="font-sans font-bold text-[18px] leading-[32px] text-[#2B3674] tracking-tight">
+              {"Trades Listing"}
+            </h4>
+            <PrimaryButton
+              text="Add New Trades"
+              onClick={() => navigate("/addNewTrade")}
+              noIcon={true}
+              className="!px-4 text-sm"
+              textClassName="!text-sm text-white"
+            />
+          </div>
+
           <DataTable
             title="Trades Listing"
             columns={columns}
@@ -260,13 +274,6 @@ const Funds = () => {
             pagination={true}
             bordered={true}
           />
-          <div className="mt-2 flex justify-end p-3">
-            <PrimaryButton
-              text="Add New Trade"
-              onClick={() => navigate("/addNewTrade")}
-              noIcon={true}
-            />
-          </div>
         </div>
       </div>
     </Layout>

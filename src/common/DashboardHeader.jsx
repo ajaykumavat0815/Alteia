@@ -25,7 +25,7 @@ const DashboardHeader = ({
             <h2 className="text-lg sm:text-2xl font-semibold text-gray-900 truncate">
               {title}
             </h2>
-            <p className="text-xs sm:text-sm text-gray-500 truncate">
+            <p className="text-xs sm:text-sm text-gray-500 truncate mb-0">
               {subtitle}
             </p>
           </>

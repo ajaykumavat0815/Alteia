@@ -19,21 +19,25 @@ const Investors = () => {
       title: "Customer Name",
       dataIndex: "name",
       key: "name",
+      sorter: (a, b) => a.name.localeCompare(b.name),
     },
     {
       title: "Email",
       dataIndex: "email",
       key: "email",
+      sorter: (a, b) => a.name.localeCompare(b.name),
     },
     {
       title: "Phone",
       dataIndex: "phone",
       key: "phone",
+      sorter: (a, b) => a.phone.localeCompare(b.phone),
     },
     {
       title: "KYC Status",
       dataIndex: "kycStatus",
       key: "kycStatus",
+      sorter: (a, b) => a.kycStatus.localeCompare(b.kycStatus),
       render: (kycStatus) => {
         const statusConfig = {
           "KVC verified": {
@@ -70,6 +74,7 @@ const Investors = () => {
       title: "Investment Status",
       dataIndex: "investmentStatus",
       key: "investmentStatus",
+      sorter: (a, b) => a.investmentStatus.localeCompare(b.investmentStatus),
       render: (investmentStatus) => {
         const colorMap = {
           "Active Investor": "text-green-600 bg-green-50",
@@ -190,12 +195,27 @@ const Investors = () => {
 
   return (
     <Layout>
-      <DashboardHeader
-        title="Track customer verification, investment activity, and key details."
-        subtitle="Customers management"
-      />
+      <div className="mt-4">
+        <DashboardHeader
+          title="Track customer verification, investment activity, and key details."
+          subtitle="Customers management"
+        />
+      </div>
       <div className="mt-2">
         <div className="bg-white rounded-lg shadow-sm border border-gray-200 p-5 m-5">
+          <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center mb-4 gap-4">
+            {" "}
+            <h4 className="font-sans font-bold text-[18px] leading-[32px] text-[#2B3674] tracking-tight">
+              {"Customer Investing"}
+            </h4>
+            <PrimaryButton
+              text="Add New Customer"
+              onClick={() => navigate("/addNewCustomer")}
+              noIcon={true}
+              className="!px-4 text-sm"
+              textClassName="!text-sm text-white"
+            />
+          </div>
           <DataTable
             title="Customer Investing"
             columns={columns}
@@ -209,13 +229,6 @@ const Investors = () => {
             pagination={true}
             bordered={true}
           />
-          <div className="mt-2 flex justify-end p-3">
-            <PrimaryButton
-              text="Add New Customer"
-              onClick={() => navigate("/addNewCustomer")}
-              noIcon={true}
-            />
-          </div>
         </div>
       </div>
     </Layout>

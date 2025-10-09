@@ -20,7 +20,6 @@ const RoiChart = ({
   lineColor = "#7CB342",
   periods = ["Today", "This Week", "This Month", "This Year"],
   defaultPeriod = "Today",
-    
 }) => {
   const [selectedPeriod, setSelectedPeriod] = useState(defaultPeriod);
 
@@ -60,20 +59,6 @@ const RoiChart = ({
   return (
     <div className="w-full max-w-6xl mx-auto">
       <div className="bg-white rounded-lg  overflow-hidden">
-        <div className="p-4">
-          <TimePeriodSelector
-            periods={periods}
-            defaultPeriod={defaultPeriod}
-            onSelectionChange={handleSelectionChange}
-            periodBgColor="#E1E1E1"
-            activePeriodBgColor="#D9F0D9"
-            activePeriodTextColor="#1B386B"
-            periodTextColor="#555555"
-            borderColor="#FFFFFF"
-            periodSelectorWidth="100%"
-          />
-        </div>
-
         {/* Chart */}
         <div className="">
           {/* <h4 className="text-gray-800 text-base font-semibold mb-4">

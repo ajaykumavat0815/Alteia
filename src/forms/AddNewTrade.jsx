@@ -165,14 +165,20 @@ const AddNewTrade = () => {
           </div>
 
           {/* Action Buttons */}
-          <div className="flex justify-end space-x-4 pt-6 ">
+          <div className="flex justify-end space-x-4 pt-6 gap-4">
             <PrimaryButton
               text="Cancel"
               btnType="secondary"
               onClick={handleCancel}
               noIcon={true}
+              textClassName="!text-sm "
             />
-            <PrimaryButton text="Save" type="submit" noIcon={true} />
+            <PrimaryButton
+              text="Save"
+              type="submit"
+              noIcon={true}
+              textClassName="!text-sm text-white"
+            />
           </div>
         </form>
       </div>

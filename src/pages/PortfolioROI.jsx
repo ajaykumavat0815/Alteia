@@ -83,7 +83,7 @@ const PortfolioROI = ({ searchValue, onSearchChange, onSearchSubmit }) => {
             </p>
           </div>
 
-          <div className="flex flex-col sm:flex-row gap-2 sm:gap-3 w-full md:w-auto">
+          {/* <div className="flex flex-col sm:flex-row gap-2 sm:gap-3 w-full md:w-auto">
             <SearchInput
               value={searchValue}
               onChange={onSearchChange}
@@ -104,7 +104,7 @@ const PortfolioROI = ({ searchValue, onSearchChange, onSearchSubmit }) => {
               noIcon={true}
               textClassName="!text-sm text-white"
             />
-          </div>
+          </div> */}
         </div>
 
         {/* Metrics Section */}

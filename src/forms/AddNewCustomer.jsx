@@ -135,15 +135,20 @@ const AddNewCustomer = () => {
             />
           </div>
 
-          <div className="flex justify-end space-x-4 pt-6 border-t border-gray-200">
+          <div className="flex justify-end space-x-4 pt-6 border-t border-gray-200 gap-4">
             <PrimaryButton
               text="Cancel"
               btnType="secondary"
               onClick={handleCancel}
               noIcon={true}
+              textClassName="!text-sm "
             />
 
-            <PrimaryButton text="Save" noIcon={true} />
+            <PrimaryButton
+              text="Save"
+              noIcon={true}
+              textClassName="!text-sm text-white"
+            />
           </div>
         </form>
       </div>
